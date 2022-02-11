@@ -1,0 +1,227 @@
+using System;
+
+namespace TicTacToe_Challenge
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[,] tabella = new string[5, 5]
+            {
+                 { "1", "|", "2", "|", "3"},
+                 { "-", "+", "-", "+", "-"},
+                 { "4", "|", "5", "|", "6"},
+                 { "-", "+", "-", "+", "-"},
+                 { "7", "|", "8", "|", "9"},
+
+            };
+            StampaTabella(tabella);
+            bool ciclo = true;
+            do
+            {
+                Console.WriteLine("Player 1, insert the number you want to replace with your X.");
+                int pl1 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Player 2, insert the number you want to replace with your O.");
+                int pl2 = Convert.ToInt32(Console.ReadLine());
+                AggiornamentoTabella(pl1, pl2, tabella);
+                Console.ReadKey();
+                Console.Clear();
+                StampaTabella(tabella);
+                ciclo = ControlloVittoria(tabella);
+                int pareggio = ControlloPareggio(tabella);
+                if (pareggio==9)
+                {
+                    Console.WriteLine("Tie!");
+                    break;
+                }
+            }
+            while (ciclo);
+            Console.WriteLine("Game ended.");
+
+        }
+        static public void StampaTabella(string[,] tabella)
+        {
+            for (int i = 0; i < tabella.GetLength(0); i++)
+            {
+                for (int j = 0; j < tabella.GetLength(1); j++)
+                {
+                    Console.Write(tabella[i, j]);
+                }
+                Console.Write("\n");
+            }
+        }
+        static public void AggiornamentoTabella(int x, int y, string[,] tabella)
+        {
+            if (x != y && x <= 9 && x >= 1 && y <= 9 && y >= 1)
+            {
+                switch (x)
+                {
+                    case 1:
+                        if (tabella[0, 0] != "X" && tabella[0, 0] != "O")
+                            tabella[0, 0] = "X";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    case 2:
+                        if (tabella[0, 2] != "X" && tabella[0, 2] != "O")
+                            tabella[0, 2] = "X";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    case 3:
+                        if (tabella[0, 4] != "X" && tabella[0, 4] != "O")
+                            tabella[0, 4] = "X";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    case 4:
+                        if (tabella[2, 0] != "X" && tabella[2, 0] != "O")
+                            tabella[2, 0] = "X";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    case 5:
+                        if (tabella[2, 2] != "X" && tabella[2, 2] != "O")
+                            tabella[2, 2] = "X";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    case 6:
+                        if (tabella[2, 4] != "X" && tabella[2, 4] != "O")
+                            tabella[2, 4] = "X";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    case 7:
+                        if (tabella[4, 0] != "X" && tabella[4, 0] != "O")
+                            tabella[4, 0] = "X";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    case 8:
+                        if (tabella[4, 2] != "X" && tabella[4, 2] != "O")
+                            tabella[4, 2] = "X";
+                        break;
+                    case 9:
+                        if (tabella[4, 4] != "X" && tabella[4, 4] != "O")
+                            tabella[4, 4] = "X";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    default:
+                        Console.WriteLine("Player 1 has selected a wrong box.");
+                        break;
+                }
+                switch (y)
+                {
+                    case 1:
+                        if (tabella[0, 0] != "X" && tabella[0, 0] != "O")
+                            tabella[0, 0] = "O";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    case 2:
+                        if (tabella[0, 2] != "X" && tabella[0, 2] != "O")
+                            tabella[0, 2] = "O";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    case 3:
+                        if (tabella[0, 4] != "X" && tabella[0, 4] != "O")
+                            tabella[0, 4] = "O";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    case 4:
+                        if (tabella[2, 0] != "X" && tabella[2, 0] != "O")
+                            tabella[2, 0] = "O";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    case 5:
+                        if (tabella[2, 2] != "X" && tabella[2, 2] != "O")
+                            tabella[2, 2] = "O";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    case 6:
+                        if (tabella[2, 4] != "X" && tabella[2, 4] != "O")
+                            tabella[2, 4] = "O";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    case 7:
+                        if (tabella[4, 0] != "X" && tabella[4, 0] != "O")
+                            tabella[4, 0] = "O";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    case 8:
+                        if (tabella[4, 2] != "X" && tabella[4, 2] != "O")
+                            tabella[4, 2] = "O";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    case 9:
+                        if (tabella[4, 4] != "X" && tabella[4, 4] != "O")
+                            tabella[4, 4] = "O";
+                        else
+                            Console.WriteLine("The selected box is not empty!");
+                        break;
+                    default:
+                        Console.WriteLine("Player 2 has selected a wrong box.");
+                        break;
+                }
+            }
+            else
+                Console.WriteLine("You both selected the same box or a nonexistent box. Please, try again.");
+        }
+        static public bool ControlloVittoria(string[,] tabella)
+        {
+            if (tabella[0, 0] == tabella[0, 2] && tabella[0, 2] == tabella[0, 4] && tabella[0, 0] == "X" ||
+                tabella[2, 0] == tabella[2, 2] && tabella[2, 2] == tabella[2, 4] && tabella[2, 0] == "X" ||
+                tabella[4, 0] == tabella[4, 2] && tabella[4, 2] == tabella[4, 4] && tabella[4, 0] == "X" ||
+                tabella[0, 0] == tabella[2, 0] && tabella[2, 0] == tabella[4, 0] && tabella[0, 0] == "X" ||
+                tabella[0, 2] == tabella[2, 2] && tabella[2, 2] == tabella[4, 2] && tabella[0, 2] == "X" ||
+                tabella[0, 4] == tabella[2, 4] && tabella[2, 4] == tabella[4, 4] && tabella[0, 4] == "X" ||
+                tabella[0, 0] == tabella[2, 2] && tabella[2, 2] == tabella[4, 4] && tabella[0, 0] == "X")
+            {
+                Console.WriteLine("Player 1 wins.");
+                return false;
+            }
+            else if (tabella[0, 0] == tabella[0, 2] && tabella[0, 2] == tabella[0, 4] && tabella[0, 0] == "O" ||
+                tabella[2, 0] == tabella[2, 2] && tabella[2, 2] == tabella[2, 4] && tabella[2, 0] == "O" ||
+                tabella[4, 0] == tabella[4, 2] && tabella[4, 2] == tabella[4, 4] && tabella[4, 0] == "O" ||
+                tabella[0, 0] == tabella[2, 0] && tabella[2, 0] == tabella[4, 0] && tabella[0, 0] == "O" ||
+                tabella[0, 2] == tabella[2, 2] && tabella[2, 2] == tabella[4, 2] && tabella[0, 2] == "O" ||
+                tabella[0, 4] == tabella[2, 4] && tabella[2, 4] == tabella[4, 4] && tabella[0, 4] == "O" ||
+                tabella[0, 0] == tabella[2, 2] && tabella[2, 2] == tabella[4, 4] && tabella[0, 0] == "O")
+            {
+                Console.WriteLine("Player 2 wins.");
+                return false;
+            } 
+            else
+                return true;
+        }
+        static public bool ControlloCasella(int x, int y, string[,] tabella)
+        {
+            if (tabella [x,y]=="X" || tabella[x, y] == "O")
+            {
+                Console.WriteLine("The selected box is not empty!");
+                return false;
+            }
+            else
+                return true;
+        }
+        static public int ControlloPareggio(string[,] tabella)
+        {
+            int counterpareggio = 0;
+            {
+                foreach (string str in tabella)
+                    if(str=="X" || str=="O")
+                    counterpareggio++;
+            }
+            return counterpareggio;
+        }
+    }
+}
